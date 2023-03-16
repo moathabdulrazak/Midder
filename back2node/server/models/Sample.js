@@ -1,10 +1,11 @@
 import { Schema } from "mongoose";
 
 
-export const SongSchema = new Schema({
+export const SampleSchema = new Schema({
   creatorId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
   name: { type: String, required: true },
   key: { type: String, required: true },
+  description: { type: String, required: true },
   coverImg: { type: String, },
   genre: { type: String },
   songUrl: { type: String, required: true },
@@ -13,7 +14,7 @@ export const SongSchema = new Schema({
 
 
 
-SongSchema.virtual('artist', {
+SampleSchema.virtual('artist', {
   localField: 'artistId',
   foreignField: '_id',
   justOne: true,
