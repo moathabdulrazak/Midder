@@ -1,0 +1,16 @@
+
+  {
+    "name": "back2node",
+    "version": "1.0.0",
+    "scripts": {
+      "build": "npm run setup:server",
+      "setup:app": "npm run setup:server && npm run setup:client",
+      "setup:client": "cd back2node.client && npm i",
+      "setup:server": "cd back2node && npm i",
+      "start": "node back2node/index.js"
+    },
+    "engines": {
+      "node": "^18.12.1"
+    }
+  }
+  
