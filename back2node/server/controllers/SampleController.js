@@ -9,7 +9,7 @@ export class SampleController extends BaseController{
     super('api/samples');
     this.router
     .get('', this.getAllSamples)
-    .get('', this.getOneSample)
+    .get('/:id', this.getOneSample)
     .use(Auth0Provider.getAuthorizedUserInfo)
     .post('', this.createSample)
   }
@@ -22,7 +22,13 @@ export class SampleController extends BaseController{
       
     }
   }
-  getOneSample(arg0, getOneSample) {
+  async getOneSample(req, res, next) {
+    try {
+      const sample = await sampleService.getOneSample(req.params.id)
+      return res.send(sample)
+    } catch (error) {
+      next(error)
+    }
     
   }
   async getAllSamples(req, res, next) {
@@ -30,7 +36,7 @@ export class SampleController extends BaseController{
       const samples = await sampleService.getAllSamples()
       return res.send(samples)
     } catch (error) {
-      
+      next(error)
     }
   }
   c
