@@ -6,11 +6,11 @@ export const audience = 'https://myauth.com'
 export const clientId = 'X4LLZ7pItbpNCuKtKbTX59nyIpYLrcO2'
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBZWZxNanmUcsD0RQyWKcyMt3mI3jXUuHQ",
-  authDomain: "midder-6d334.firebaseapp.com",
-  projectId: "midder-6d334",
-  storageBucket: "midder-6d334.appspot.com",
-  messagingSenderId: "884095154014",
-  appId: "1:884095154014:web:f0669c3257d17af41541cf"
+ export const firebaseConfig = {
+  apiKey: "AIzaSyByE41Jzepvtk10pD1lWS5uDCLFMDd_UhE",
+  authDomain: "midder-2414c.firebaseapp.com",
+  projectId: "midder-2414c",
+  storageBucket: "midder-2414c.appspot.com",
+  messagingSenderId: "957296376665",
+  appId: "1:957296376665:web:33fae0c2a29aed68786a48"
 };
