@@ -16,6 +16,7 @@ class SampleService{
     const res = await api.post('api/samples', sampleData)
     logger.log(res.data, "[Creating Sample]")
     AppState.samples.push(res.data)
+    return res.data
   }
 }
 

@@ -15,6 +15,27 @@
         <div class="modal-body">
           <form @submit.prevent="uploadSample()">
             <div class="form-group">
+              <label for="name">sample name</label>
+              <input v-model="editable.name" type="text" class="form-control" id="name" aria-describedby="emailHelp"
+                placeholder="Enter name">
+            </div>
+            <div class="form-group">
+              <label for="genre">genre </label>
+              <input v-model="editable.genre" type="text" class="form-control" id="genre" aria-describedby="genre"
+                placeholder="Enter genre">
+            </div>
+            <div class="form-group">
+              <label for="genre">desription </label>
+              <input v-model="editable.description" type="text" class="form-control" id="description"
+                aria-describedby="description" placeholder="Enter description">
+            </div>
+            <div class="form-group">
+              <label for="img">img? </label>
+              <input v-model="editable.coverImg" type="url" class="form-control" id="img" aria-describedby="img"
+                placeholder="img url">
+            </div>
+
+            <div class="form-group">
               <label class="btn-dark" for="formFile">choose a sample</label>
               <input @change="setSample" name="file" type="file" class="form-control input file p-2 " id="songLink"
                 accept="audio/*" required aria-describedby="emailHelp" placeholder="upload song">
@@ -62,9 +83,10 @@ export default {
       async createSample() {
         try {
           await sampleService.createSample(editable.value)
-          Modal.getOrCreateInstance('#exampleModal').hide()
+          editable.value = {}
+          Modal.getOrCreateInstance('#exampleModal').hide();
         } catch (error) {
-          Pop.error(error)
+          Pop.error(error);
         }
       }
 
