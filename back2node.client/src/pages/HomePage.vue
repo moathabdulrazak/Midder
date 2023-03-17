@@ -3,9 +3,34 @@
 </template>
 
 <script>
+import { async } from "@firebase/util";
+import { computed, onMounted } from "vue";
+import { AppState } from "../AppState.js";
+import { sampleService } from "../services/SamplesService.js";
+import { logger } from "../utils/Logger.js";
+import Pop from "../utils/Pop.js";
+
 export default {
   setup() {
-    return {}
+
+    async function getAllSamples() {
+      try {
+        await sampleService.getAllSamples();
+      } catch (error) {
+        logger.log(error.message)
+        Pop.error(error.message)
+      }
+    }
+
+
+    onMounted(() => {
+      getAllSamples();
+    })
+
+    return {
+      samples: computed(() => AppState.samples),
+
+    }
   }
 }
 </script>
