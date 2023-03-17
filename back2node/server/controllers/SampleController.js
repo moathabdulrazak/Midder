@@ -12,6 +12,17 @@ export class SampleController extends BaseController{
     .get('/:id', this.getOneSample)
     .use(Auth0Provider.getAuthorizedUserInfo)
     .post('', this.createSample)
+    .delete('', this.removeSample)
+  }
+  async removeSample(req, res, next) {
+   try {
+    req.body.accountId  = req.userInfo.id
+    const removeMessage = await sampleService.removeSample(req.params.id, req.userInfo.id)
+    return res.send(removeMessage)
+   } catch (error) {
+    next(error)
+   }
+
   }
   async createSample(req, res,  next) {
     try {

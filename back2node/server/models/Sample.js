@@ -14,8 +14,8 @@ export const SampleSchema = new Schema({
 
 
 
-SampleSchema.virtual('artist', {
-  localField: 'artistId',
+SampleSchema.virtual('creator', {
+  localField: 'creatorId',
   foreignField: '_id',
   justOne: true,
   ref: 'Account'
