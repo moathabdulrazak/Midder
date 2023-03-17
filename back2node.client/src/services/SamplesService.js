@@ -11,6 +11,12 @@ class SampleService{
     logger.log(res.data, "[ All Samples]")
     AppState.samples = res.data
   }
+
+  async createSample(sampleData){
+    const res = await api.post('api/samples', sampleData)
+    logger.log(res.data, "[Creating Sample]")
+    AppState.samples.push(res.data)
+  }
 }
 
 

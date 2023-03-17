@@ -28,6 +28,9 @@
 <script>
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted } from 'vue';
+import Pop from "../utils/Pop.js";
+import { sampleService } from "../services/SamplesService.js";
+import { firebaseService } from "../services/FirebaseService.js";
 export default {
   setup() {
     const editable = ref({})
@@ -35,6 +38,29 @@ export default {
     const samples = ref({})
     return {
       editable,
+
+
+      setSample(e) {
+        samples.value = e.target.files
+        logger.log('New Sample: ', samples.value)
+      },
+      async uploadSong() {
+        try {
+          const url = await firebaseService.uploadSample(samples.value[0])
+          editable.value.sampleUrl = url
+          await this.createSample()
+        } catch (error) {
+        }
+
+      },
+
+      async createSample() {
+        try {
+          await sampleService.createSample(editable.value)
+        } catch (error) {
+          Pop.error(error)
+        }
+      }
 
     }
   }

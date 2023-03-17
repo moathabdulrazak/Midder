@@ -18,28 +18,17 @@ class FirebaseService {
       Pop.toast(error.message, 'error')
     }
   }
-  // async upload(image) {
-  //   const collection = storage.ref('Images')
-  //   const resource = collection.child(image.name)
-  //   const snapshot = await resource.put(image, {
-  //     customMetadata: {
-  //       uid: AppState.account.id, size: image.size, type: 'Images'
-  //     }
-  //   })
-  //   const url = await snapshot.ref.getDownloadURL()
-  //   return url
-  // }
-  // async uploadSong(media) {
-  //   const collection = storage.ref('Media')
-  //   const resource = collection.child(media.name)
-  //   const snapshot = await resource.put(media, {
-  //     customMetadata: {
-  //       uid: AppState.account.id, size: media.size, type: 'Media'
-  //     }
-  //   })
-  //   const url = await snapshot.ref.getDownloadURL()
-  //   return url
-  // }
+ async uploadSample(samples){
+  const collection = storage.ref('Samples')
+  const resource  = collection.child(samples.name)
+  const snapshot = await resource.put(Samples, {
+    customMetadata: {
+      uid: AppState.account.id, size: samples.size, type: 'Samples'
+    }
+  })
+  const sampleUrl = await snapshot.ref.getDownloadURL()
+  return sampleUrl
+ }
 }
 
 export const firebaseService = new FirebaseService()
