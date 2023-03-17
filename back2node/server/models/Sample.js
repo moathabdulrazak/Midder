@@ -8,7 +8,7 @@ export const SampleSchema = new Schema({
   description: { type: String, required: true },
   coverImg: { type: String, },
   genre: { type: String },
-  songUrl: { type: String, required: true },
+  sampleUrl: { type: String, required: true },
   streams: { type: Number, required: false, default: 0 },
 }, { timestamps: true, toJSON: { virtuals: true } })
 

@@ -12,7 +12,16 @@ export class SampleController extends BaseController{
     .get('/:id', this.getOneSample)
     .use(Auth0Provider.getAuthorizedUserInfo)
     .post('', this.createSample)
-    .delete('', this.removeSample)
+    .put('/:id', this.updateSample)
+    .delete('/:id', this.removeSample)
+  }
+  async updateSample(req, res, next) {
+    try {
+      const updatedSample = await sampleService.updateSample(req.params.id, req.body)
+      return res.send(updatedSample)
+    } catch (error) {
+      next(error)
+    }
   }
   async removeSample(req, res, next) {
    try {
