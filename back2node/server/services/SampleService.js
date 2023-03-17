@@ -8,18 +8,27 @@ import { logger } from "../utils/Logger.js"
 
 class SampleService {
   // @ts-ignore
-  async updateSample(sampleId, sampleData) {
-    const originalSample = await this.getOneSample(sampleId)
+  async updateSample(sampleId, sampleData, userId) {
+    const originalSample = await this.getOneSample(sampleId);
     if (!originalSample) {
-      throw new BadRequest("Sample not found:"+ sampleId)}
-      originalSample.name = sampleData.name ? sampleData.name : originalSample.key = sampleData.key ? sampleData.key : originalSample.key
-      originalSample.description = sampleData.description ? sampleData.description : originalSample.description
-      originalSample.coverImg = sampleData.coverImg ? sampleData.coverImg : originalSample.coverImg
-      originalSample.genre = sampleData.genre ? sampleData.genre : originalSample.genre
-      originalSample.sampleUrl = sampleData.sampleUrl ? sampleData.sampleUrl : originalSample.sampleUrl
-      await originalSample.save()
-      return originalSample
+      throw new BadRequest("Sample not found: " + sampleId);
+    }
+    if (originalSample.creatorId !== userId) {
+      throw new Forbidden("You are not authorized to update this sample");
+    }
+    originalSample.name = sampleData.name ? sampleData.name : originalSample.key = sampleData.key ? sampleData.key : originalSample.key;
+    originalSample.description = sampleData.description ? sampleData.description : originalSample.description;
+    originalSample.coverImg = sampleData.coverImg ? sampleData.coverImg : originalSample.coverImg;
+    originalSample.genre = sampleData.genre ? sampleData.genre : originalSample.genre;
+    originalSample.sampleUrl = sampleData.sampleUrl ? sampleData.sampleUrl : originalSample.sampleUrl;
+    await originalSample.save();
+    return originalSample;
   }
+  
+  
+  
+  
+  
  async removeSample(sampleId, userId) {
    const sample = await this.getOneSample(sampleId)
    // @ts-ignore

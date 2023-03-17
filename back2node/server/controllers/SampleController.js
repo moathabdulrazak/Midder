@@ -17,10 +17,11 @@ export class SampleController extends BaseController{
   }
   async updateSample(req, res, next) {
     try {
-      const updatedSample = await sampleService.updateSample(req.params.id, req.body)
-      return res.send(updatedSample)
+      const userId = req.user.id
+      const updatedSample = await sampleService.updateSample(req.params.id, req.body, userId);
+      return res.send(updatedSample);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
   async removeSample(req, res, next) {
