@@ -1,5 +1,10 @@
 <template>
   <h1>Midder start</h1>
+
+  <div v-for="s in samples">
+    <SamplesCard :sample="s" />
+
+  </div>
 </template>
 
 <script>
@@ -8,6 +13,7 @@ import { computed, onMounted } from "vue";
 import { AppState } from "../AppState.js";
 import { sampleService } from "../services/SamplesService.js";
 import { logger } from "../utils/Logger.js";
+import SamplesCard from "../components/SamplesCard.vue"
 import Pop from "../utils/Pop.js";
 
 export default {
