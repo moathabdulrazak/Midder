@@ -13,11 +13,14 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <form @submit.prevent="uploadSample()">
+            <div class="form-group">
+              <label class="btn-dark" for="formFile">choose a sample</label>
+              <input @change="setSample" name="file" type="file" class="form-control inputfile p-2 " id="songLink"
+                accept="audio/*" required aria-describedby="emailHelp" placeholder="upload song">
+              <button class="btn mt-2 btn btn-light">upload</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -27,10 +30,12 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted } from 'vue';
+import { computed, reactive, onMounted, ref } from 'vue';
 import Pop from "../utils/Pop.js";
 import { sampleService } from "../services/SamplesService.js";
 import { firebaseService } from "../services/FirebaseService.js";
+import { Modal } from "bootstrap";
+import { logger } from "../utils/Logger.js";
 export default {
   setup() {
     const editable = ref({})
@@ -44,7 +49,7 @@ export default {
         samples.value = e.target.files
         logger.log('New Sample: ', samples.value)
       },
-      async uploadSong() {
+      async uploadSample() {
         try {
           const url = await firebaseService.uploadSample(samples.value[0])
           editable.value.sampleUrl = url
@@ -57,6 +62,7 @@ export default {
       async createSample() {
         try {
           await sampleService.createSample(editable.value)
+          Modal.getOrCreateInstance('#exampleModal').hide()
         } catch (error) {
           Pop.error(error)
         }

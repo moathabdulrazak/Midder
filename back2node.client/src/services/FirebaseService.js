@@ -19,11 +19,11 @@ class FirebaseService {
     }
   }
  async uploadSample(samples){
-  const collection = storage.ref('Samples')
+  const collection = storage.ref('samples')
   const resource  = collection.child(samples.name)
-  const snapshot = await resource.put(Samples, {
+  const snapshot = await resource.put(samples, {
     customMetadata: {
-      uid: AppState.account.id, size: samples.size, type: 'Samples'
+      uid: AppState.account.id, size: samples.size, type: 'samples'
     }
   })
   const sampleUrl = await snapshot.ref.getDownloadURL()

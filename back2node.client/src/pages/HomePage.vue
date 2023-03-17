@@ -3,6 +3,9 @@
 
   <UploadSample />
 
+  <audio
+    src="https://firebasestorage.googleapis.com/v0/b/midder-2414c.appspot.com/o/samples%2Fbeatsbyslade%20%2B%20beris%20-%20habibi%20-%20160.mp3?alt=media&token=71691395-fbde-42be-b848-a5095d76779d"></audio>
+
   <div v-for="s in samples">
     <SamplesCard :sample="s" />
 
