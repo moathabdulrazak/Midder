@@ -16,7 +16,7 @@
           <form @submit.prevent="uploadSample()">
             <div class="form-group">
               <label class="btn-dark" for="formFile">choose a sample</label>
-              <input @change="setSample" name="file" type="file" class="form-control inputfile p-2 " id="songLink"
+              <input @change="setSample" name="file" type="file" class="form-control input file p-2 " id="songLink"
                 accept="audio/*" required aria-describedby="emailHelp" placeholder="upload song">
               <button class="btn mt-2 btn btn-light">upload</button>
             </div>

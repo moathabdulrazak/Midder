@@ -24,6 +24,9 @@ class FirebaseService {
   const snapshot = await resource.put(samples, {
     customMetadata: {
       uid: AppState.account.id, size: samples.size, type: 'samples'
+    },
+    headers: {
+      'X-Goog-Upload-Command': 'upload, finalize'
     }
   })
   const sampleUrl = await snapshot.ref.getDownloadURL()

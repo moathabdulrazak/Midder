@@ -1,7 +1,8 @@
 <template>
   <div class="component">
     <h3>{{ sample.name }}</h3>
-    <img class="img-fluid img-size" :src="sample.coverImg" alt="">
+    <!-- <img class="img-fluid img-size" :src="sample.coverImg" alt=""> -->
+    <audio controls :src="sample.sampleUrl"></audio>
   </div>
 </template>
 
