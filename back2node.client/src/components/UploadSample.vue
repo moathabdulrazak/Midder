@@ -13,7 +13,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="createSample">
+          <form @submit.prevent="uploadSample()">
             <div class="modal-body">
               <div class="form-floating mb-3 elevation-5">
                 <input v-model="editable.name" type="text" required class="form-control" id="title"
@@ -38,10 +38,10 @@
                   placeholder="Cover Image">
                 <label for="coverImg">Cover Image</label>
               </div>
-              <div class="form-floating mb-3 elevation-5">
-                <input v-model="editable.sampleUrl" type="url" required class="form-control" id="sample"
-                  placeholder="sample link">
-                <label for="sampleUrl">sampleUrl Image</label>
+              <div class="form-group">
+                <label class="btn-dark" for="formFile">choose a song</label>
+                <input @change="setAudio" name="file" type="file" class="form-control inputfile p-2 " id="songLink"
+                  accept="audio/*" required aria-describedby="emailHelp" placeholder="upload song">
               </div>
             </div>
             <div class="modal-footer">
@@ -50,10 +50,6 @@
             </div>
           </form>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
@@ -67,11 +63,26 @@ import { computed, reactive, onMounted, ref } from 'vue';
 import Pop from "../utils/Pop.js";
 import { Modal } from "bootstrap";
 import { sampleService } from "../services/SamplesService.js";
+import { firebaseService } from "../services/FirebaseService.js";
 export default {
   setup() {
     const editable = ref({})
+    const media = ref({})
     return {
       editable,
+      setAudio(e) {
+        media.value = e.target.files
+        logger.log('New audo: ', media.value)
+      },
+      async uploadSample() {
+        try {
+          const url = await firebaseService.uploadSong(media.value[0])
+          editable.value.sampleUrl = url
+          await this.createSample()
+        } catch (error) {
+        }
+
+      },
       async createSample() {
         try {
           const sample = await sampleService.createSample(editable.value)

@@ -18,20 +18,18 @@ class FirebaseService {
       Pop.toast(error.message, 'error')
     }
   }
- async uploadSample(samples){
-  const collection = storage.ref('samples')
-  const resource  = collection.child(samples.name)
-  const snapshot = await resource.put(samples, {
-    customMetadata: {
-      uid: AppState.account.id, size: samples.size, type: 'samples'
-    },
-    headers: {
-      'X-Goog-Upload-Command': 'upload, finalize'
-    }
-  })
-  const sampleUrl = await snapshot.ref.getDownloadURL()
-  return sampleUrl
- }
+
+  async uploadSong(media) {
+    const collection = storage.ref('Media')
+    const resource = collection.child(media.name)
+    const snapshot = await resource.put(media, {
+      customMetadata: {
+        uid: AppState.account.id, size: media.size, type: 'Media'
+      }
+    })
+    const url = await snapshot.ref.getDownloadURL()
+    return url
+  }
 }
 
 export const firebaseService = new FirebaseService()
