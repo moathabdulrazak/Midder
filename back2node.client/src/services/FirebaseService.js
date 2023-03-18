@@ -30,6 +30,19 @@ class FirebaseService {
     const url = await snapshot.ref.getDownloadURL()
     return url
   }
+
+  async uploadImage(media) {
+    const collection = storage.ref('Media')
+    const resource = collection.child(media.name)
+    const snapshot = await resource.put(media, {
+      customMetadata: {
+        uid: AppState.account.id, size: media.size, type: 'Media'
+      }
+    })
+    const url = await snapshot.ref.getDownloadURL()
+    return url
+  }
+  
 }
 
 export const firebaseService = new FirebaseService()
