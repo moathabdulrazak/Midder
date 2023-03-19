@@ -50,7 +50,8 @@ class SampleService {
     return sample
   }
   async getAllSamples() {
-    const samples = await dbContext.Sample.find()
+    // const samples = await dbContext.Sample.find()
+    const samples = await dbContext.Sample.find().populate('creator')
     logger.log("all samples", samples)
     return samples
   }

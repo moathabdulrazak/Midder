@@ -11,9 +11,9 @@
       </div>
     </div>
     <div class="creator-info">
-      <img class="profile-pic" :src="account.picture" alt="">
+      <img class="profile-pic" :src="sample.creator?.picture" alt="">
       <div class="creator-details">
-        <h3 class="name">{{ sample.creator }}</h3>
+        <h3 class="name">{{ sample.creator?.name }}</h3>
       </div>
     </div>
   </div>
