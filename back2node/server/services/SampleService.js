@@ -21,6 +21,7 @@ class SampleService {
     originalSample.coverImg = sampleData.coverImg ? sampleData.coverImg : originalSample.coverImg;
     originalSample.genre = sampleData.genre ? sampleData.genre : originalSample.genre;
     originalSample.sampleUrl = sampleData.sampleUrl ? sampleData.sampleUrl : originalSample.sampleUrl;
+    originalSample.tempo = sampleData.tempo ? sampleData.tempo : originalSample.tempo;
     await originalSample.save();
     return originalSample;
   }
