@@ -3,7 +3,7 @@
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <h1>Midder</h1>
     </router-link>
-    <div class="text-dark">
+    <div class="">
       <UploadSample />
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"

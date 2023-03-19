@@ -12,7 +12,7 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Upload Sample</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body text-dark">
           <form @submit.prevent="uploadSample()">
             <div class="modal-body">
               <div class="form-floating mb-3 elevation-5">
