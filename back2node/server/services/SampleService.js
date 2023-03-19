@@ -56,7 +56,7 @@ class SampleService {
     return samples
   }
   async createSample(sampleData) {
-    const sample = await (await dbContext.Sample.create(sampleData))
+    const sample = await (await (await dbContext.Sample.create(sampleData)).populate('creator'))
     logger.log("created a sample")
     return sample
   }
