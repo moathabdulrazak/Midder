@@ -7,6 +7,9 @@ import { logger } from "../utils/Logger.js"
 
 
 class SampleService {
+  async getMySamples(_id) {
+    const mySamples = await dbContext.Sample.find({_id}).populate('samples')
+  }
   async getSamplesByProfileId(creatorId) {
     // debugger
     const samples = await dbContext.Sample.find({ creatorId })
