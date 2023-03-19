@@ -13,7 +13,9 @@
     <div class="creator-info">
       <img class="profile-pic" :src="sample.creator?.picture" alt="">
       <div class="creator-details">
-        <h3 class="name">{{ sample.creator?.name }}</h3>
+        <router-link :to="{ name: 'Profile', params: { profileId: sample?.creatorId } }">
+          <h3 class="name">{{ sample.creator?.name }}</h3>
+        </router-link>
       </div>
     </div>
   </div>
