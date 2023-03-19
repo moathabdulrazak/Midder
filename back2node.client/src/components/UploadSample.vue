@@ -33,6 +33,11 @@
                 <input v-model="editable.genre" type="text" required class="form-control" id="genre" placeholder="Genre">
                 <label for="genre">Genre</label>
               </div>
+              <div class="form-floating mb-3 elevation-5">
+                <input v-model="editable.tempo" type="number" required class="form-control" id="tempo"
+                  placeholder="tempo">
+                <label for="tempo">tempo</label>
+              </div>
               <div class="form-group mb-3">
                 <label class="btn btn-dark form-file-label" for="songLink">
                   <input @change="setAudio" name="file" type="file" class="form-file-input d-none" id="songLink"
@@ -103,6 +108,7 @@ export default {
       },
       async createSample() {
         try {
+          debugger
           const sample = await sampleService.createSample(editable.value)
           editable.value = {}
           Modal.getOrCreateInstance('#exampleModal').hide()

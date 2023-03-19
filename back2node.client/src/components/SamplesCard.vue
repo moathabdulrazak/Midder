@@ -9,6 +9,9 @@
       <div class="stream-info">
         <p class="streams">{{ sample.streams }} streams</p>
       </div>
+      <div class="stream-info">
+        <p class="streams">{{ sample.tempo }} bpm</p>
+      </div>
     </div>
     <div class="creator-info">
       <img class="profile-pic" :src="sample.creator?.picture" alt="">
