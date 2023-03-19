@@ -1,5 +1,5 @@
 <template>
-  <div v-for="s in samples">
+  <div class="pt-3" v-for="s in samples">
     <SamplesCard :sample="s" />
 
   </div>

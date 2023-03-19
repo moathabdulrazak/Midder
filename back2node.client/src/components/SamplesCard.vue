@@ -10,7 +10,7 @@
         <p class="streams">{{ sample.streams }} streams</p>
       </div>
       <div class="stream-info">
-        <p class="streams">{{ sample.tempo }} bpm</p>
+        <p class="streams">{{ sample.tempo }} BPM</p>
       </div>
     </div>
     <div class="creator-info">
@@ -44,7 +44,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 2px solid purple;
+  border: 5px solid purple;
   padding: 20px;
   border-radius: 10px;
 }
