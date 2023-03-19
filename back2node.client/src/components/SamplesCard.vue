@@ -1,18 +1,20 @@
 <template>
   <div class="component">
-    <audio controls :src="sample.sampleUrl"></audio>
-
-    <div class="background-img" :style="{ backgroundImage: `url(${sample.coverImg})` }">
-      <div class="overlay"></div>
+    <div class="image-container">
+      <img class="sample-image" :src="sample.coverImg" alt="">
+    </div>
+    <div class="audio-container">
       <h3 class="title">{{ sample.name }}</h3>
+      <audio controls :src="sample.sampleUrl"></audio>
       <div class="stream-info">
         <p class="streams">{{ sample.streams }} streams</p>
-        <div class="separator"></div>
       </div>
     </div>
-    <div class="profile">
+    <div class="creator-info">
       <img class="profile-pic" :src="account.picture" alt="">
-      <h3 class="name">{{ account.name }}</h3>
+      <div class="creator-details">
+        <h3 class="name">{{ account.name }}</h3>
+      </div>
     </div>
   </div>
 </template>
@@ -34,86 +36,78 @@ export default {
 <style lang="scss" scoped>
 .component {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid purple;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sample-image {
+  height: 20vh;
+  border-radius: 10px;
+}
+
+.audio-container {
+  flex: 2;
+  display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.background-img {
-  position: relative;
-  height: 40vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1;
-  border-radius: 10px;
+  justify-content: center;
+  padding: 0 20px;
 }
 
 .title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 3rem;
-  z-index: 2;
-}
-
-audio {
-  margin-top: 20px;
-  width: 70%;
+  margin-top: 0;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .stream-info {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .streams {
   font-size: 1.2rem;
   font-weight: bold;
-  margin-right: 20px;
+  margin-left: 10px;
 }
 
-.separator {
-  height: 10px;
-  width: 1px;
-  background-color: white;
-  margin: 0 20px;
-}
-
-.length {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-left: 20px;
-}
-
-.profile {
+.creator-info {
+  flex: 1;
   display: flex;
   align-items: center;
-  margin-top: 30px;
+  justify-content: center;
 }
 
 .profile-pic {
-  height: 8vh;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
-  margin-right: 20px;
+  margin-right: 10px;
+}
+
+.creator-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .name {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
+  margin: 0;
 }
 </style>
