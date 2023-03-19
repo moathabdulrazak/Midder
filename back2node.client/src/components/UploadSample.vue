@@ -1,7 +1,7 @@
 <template>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    upload
+  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Upload
   </button>
 
   <!-- Modal -->
@@ -9,7 +9,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Upload Sample</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -17,38 +17,40 @@
             <div class="modal-body">
               <div class="form-floating mb-3 elevation-5">
                 <input v-model="editable.name" type="text" required class="form-control" id="title"
-                  placeholder="event name">
-                <label for="name">sample name</label>
+                  placeholder="Sample Name">
+                <label for="name">Sample Name</label>
               </div>
               <div class="form-floating mb-3 elevation-5">
-                <input v-model="editable.key" type="text" required class="form-control" id="key" placeholder="location">
-                <label for="key">key</label>
+                <input v-model="editable.key" type="text" required class="form-control" id="key" placeholder="Location">
+                <label for="key">Location</label>
               </div>
               <div class="form-floating mb-3 elevation-5">
                 <input v-model="editable.description" type="text" required class="form-control" id="description"
-                  placeholder="description?">
-                <label for="description">description</label>
+                  placeholder="Description">
+                <label for="description">Description</label>
               </div>
               <div class="form-floating mb-3 elevation-5">
-                <input v-model="editable.genre" type="text" required class="form-control" id="genre" placeholder="genre">
-                <label for="genre">genre</label>
+                <input v-model="editable.genre" type="text" required class="form-control" id="genre" placeholder="Genre">
+                <label for="genre">Genre</label>
               </div>
-              <div class="form-group">
-                <label class="btn-dark" for="formFile">Choose a sample</label>
-                <input @change="setAudio" name="file" type="file" class="form-control inputfile p-2 " id="songLink"
-                  accept="audio/*" required aria-describedby="emailHelp" placeholder="Upload song">
+              <div class="form-group mb-3">
+                <label class="btn btn-dark form-file-label" for="songLink">
+                  <input @change="setAudio" name="file" type="file" class="form-file-input d-none" id="songLink"
+                    accept="audio/*" required>
+                  Choose a sample
+                </label>
               </div>
-
-              <div class="form-group">
-                <label class="btn-dark" for="formFile">Choose an image</label>
-                <input @change="setImage" name="file" type="file" class="form-control inputfile p-2 " id="imageLink"
-                  accept="image/*" required aria-describedby="emailHelp" placeholder="Upload image">
+              <div class="form-group mb-3">
+                <label class="btn btn-dark form-file-label" for="imageLink">
+                  <input @change="setImage" name="file" type="file" class="form-file-input d-none" id="imageLink"
+                    accept="image/*" required>
+                  Choose an image
+                </label>
               </div>
-
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
           </form>
 
@@ -57,7 +59,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import { AppState } from '../AppState';
@@ -112,4 +113,81 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.modal-header {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.modal-title {
+  margin: 0;
+  font-weight: bold;
+}
+
+.modal-body {
+  padding: 1rem;
+}
+
+.modal-footer {
+  justify-content: space-between;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #5a6268;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.inputfile {
+  display: none;
+}
+
+.form-file-label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #f0f0f0;
+  border: 1px solid #f0f0f0;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.btn-dark {
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
+.btn-dark:hover {
+  background-color: #23272b;
+  border-color: #23272b;
+}
+
+.progress {
+  height: 10px;
+  background-color: #d1d1d1;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background-color: #007bff;
+}
+</style>

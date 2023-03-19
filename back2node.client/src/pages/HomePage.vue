@@ -1,10 +1,4 @@
 <template>
-  <h1>Midder start</h1>
-
-  <UploadSample />
-
-
-
   <div v-for="s in samples">
     <SamplesCard :sample="s" />
 
@@ -19,7 +13,6 @@ import { sampleService } from "../services/SamplesService.js";
 import { logger } from "../utils/Logger.js";
 import SamplesCard from "../components/SamplesCard.vue"
 import Pop from "../utils/Pop.js";
-import UploadSample from "../components/UploadSample.vue";
 
 export default {
   setup() {
@@ -39,7 +32,6 @@ export default {
       samples: computed(() => AppState.samples),
     };
   },
-  components: { UploadSample }
 }
 </script>
 
