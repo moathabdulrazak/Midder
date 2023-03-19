@@ -13,7 +13,7 @@
     <div class="creator-info">
       <img class="profile-pic" :src="account.picture" alt="">
       <div class="creator-details">
-        <h3 class="name">{{ account.name }}</h3>
+        <h3 class="name">{{ sample.creator }}</h3>
       </div>
     </div>
   </div>

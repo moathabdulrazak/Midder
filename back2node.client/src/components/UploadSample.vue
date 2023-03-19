@@ -22,7 +22,7 @@
               </div>
               <div class="form-floating mb-3 elevation-5">
                 <input v-model="editable.key" type="text" required class="form-control" id="key" placeholder="Location">
-                <label for="key">Location</label>
+                <label for="key">key</label>
               </div>
               <div class="form-floating mb-3 elevation-5">
                 <input v-model="editable.description" type="text" required class="form-control" id="description"
@@ -39,6 +39,7 @@
                     accept="audio/*" required>
                   Choose a sample
                 </label>
+                <span v-if="editable.sampleUrl">Selected file: {{ editable.sampleUrl }}</span>
               </div>
               <div class="form-group mb-3">
                 <label class="btn btn-dark form-file-label" for="imageLink">
@@ -46,6 +47,7 @@
                     accept="image/*" required>
                   Choose an image
                 </label>
+                <span v-if="editable.coverImg">Selected file: {{ editable.coverImg }}</span>
               </div>
             </div>
             <div class="modal-footer">
@@ -80,10 +82,12 @@ export default {
       image,
       setAudio(e) {
         audio.value = e.target.files
+        editable.value.sampleUrl = audio.value[0].name
         logger.log('New audio:', audio.value)
       },
       setImage(e) {
         image.value = e.target.files
+        editable.value.coverImg = image.value[0].name
         logger.log('New image:', image.value)
       },
       async uploadSample() {
@@ -170,13 +174,13 @@ export default {
 }
 
 .btn-dark {
-  background-color: #343a40;
-  border-color: #343a40;
+  background-color: #ffffff;
+  border-color: #000000;
 }
 
 .btn-dark:hover {
-  background-color: #23272b;
-  border-color: #23272b;
+  background-color: #000000;
+  border-color: #000000;
 }
 
 .progress {
