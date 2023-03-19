@@ -7,6 +7,11 @@ import { logger } from "../utils/Logger.js"
 
 
 class SampleService {
+  async getSamplesByProfileId(creatorId) {
+    // debugger
+    const samples = await dbContext.Sample.find({ creatorId })
+    return samples
+  }
   // @ts-ignore
   async updateSample(sampleId, sampleData, userId) {
     const originalSample = await this.getOneSample(sampleId);
