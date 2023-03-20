@@ -7,7 +7,8 @@ export const AccountSchema = new Schema(
     email: { type: String, lowercase: true, unique: true },
     name: { type: String, required: true },
     sampleId: { type: Schema.Types.ObjectId, ref: 'samples' },
-    picture: { type: String }
+    picture: { type: String },
+    coverImg: { type: String }
     
     // NOTE If you wish to add additional properties do so here
   },
