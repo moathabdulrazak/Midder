@@ -5,20 +5,22 @@ import { BadRequest } from "../utils/Errors.js";
 
 class FollowersService{
   async unfollowUser(id, accountId) {
-    const follow = await dbContext.Followers.findById(id).populate('creator')
+    const follow = await dbContext.Followers.findOne({ _id: id, accountId: accountId }).populate('creator');
     if (!follow) {
-        throw new BadRequest('No follow found')
+      throw new BadRequest('No follow found');
     }
     // @ts-ignore
-    const profile = await profileService.getProfileById(accountId)
+    const profile = await profileService.getProfileById(follow.followingId);
     // @ts-ignore
-    await follow.remove()
+    profile.isFollowed = false;
     // @ts-ignore
-    profile.isFollowed = false
+    await profile.save();
     // @ts-ignore
-    // await follow.save()
-    return `Successfully unfollowed ${profile.name}`
+    await follow.remove();
+    return `Successfully unfollowed`;
   }
+
+  
   async followUser(body) {
 
     const profile = await profileService.getProfileById(body.followingId)
