@@ -22,10 +22,7 @@
                     <input type="url" class="form-control" v-model="editable.picture" name="picture"
                       placeholder="picture">
                   </div>
-                  <div>
-                    <label for="coverImg">Cover Image:</label>
-                    <input type="url" class="form-control" v-model="editable.coverImg" name="coverImg">
-                  </div>
+
                   <div class="col-md-2">
                     <button type="submit" class="btn btn-dark w-100 mt-2 ">Save</button>
                   </div>
