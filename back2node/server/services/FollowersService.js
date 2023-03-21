@@ -1,8 +1,24 @@
 
 import { dbContext } from "../db/DbContext.js";
 import {profileService} from "../services/ProfileService.js";
+import { BadRequest } from "../utils/Errors.js";
 
 class FollowersService{
+  async unfollowUser(id, accountId) {
+    const follow = await dbContext.Followers.findById(id).populate('creator')
+    if (!follow) {
+        throw new BadRequest('No follow found')
+    }
+    // @ts-ignore
+    const profile = await profileService.getProfileById(accountId)
+    // @ts-ignore
+    await follow.remove()
+    // @ts-ignore
+    profile.isFollowed = false
+    // @ts-ignore
+    // await follow.save()
+    return `Successfully unfollowed ${profile.name}`
+  }
   async followUser(body) {
 
     const profile = await profileService.getProfileById(body.followingId)

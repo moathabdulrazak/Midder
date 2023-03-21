@@ -12,9 +12,16 @@ export class FollowersController extends BaseController {
     .post('', this.followUser)
     .delete('/:id', this.unfollowUser)
   }
-  async unfollowUser(req, res, next) {
-  }
 
+
+  async unfollowUser(req, res, next) {
+    try {
+        const message = await followersService.unfollowUser(req.params.id, req.userInfo.id)
+        return res.send(message)
+    } catch (error) {
+        next(error)
+    }
+}
   
    async followUser(req, res, next ) {
     try {
