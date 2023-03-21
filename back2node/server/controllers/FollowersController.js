@@ -1,4 +1,5 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
+import { followersService } from "../services/FollowersService.js";
 import BaseController from "../utils/BaseController.js";
 
 
@@ -11,9 +12,15 @@ export class FollowersController extends BaseController {
     .post('', this.followUser)
     .delete('/:id', this.unfollowUser)
   }
-  unfollowUser(req, res, next) {
+  async unfollowUser(req, res, next) {
   }
-  followUser(req, res, next ) {
-    
+   async followUser(req, res, next ) {
+    try {
+      req.body.accountId = req.userInfo.id
+      const follower = await followersService.followUser(req.body)
+      res.send(follower)
+    } catch (error) {
+      next(error)
+    }
   }
 }
