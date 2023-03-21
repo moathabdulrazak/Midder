@@ -18,7 +18,6 @@ export class FollowersController extends BaseController {
   
    async followUser(req, res, next ) {
     try {
-      debugger
       req.body.accountId = req.userInfo.id
       const follower = await followersService.followUser(req.body)
       res.send(follower)
