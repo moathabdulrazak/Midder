@@ -9,7 +9,7 @@ export class FollowersController extends BaseController {
     super('api/followers');
     this.router
     .use(Auth0Provider.getAuthorizedUserInfo)
-    .post('', this.followUser)
+    .post('/:id', this.followUser)
     .delete('/:id', this.unfollowUser)
   }
   async unfollowUser(req, res, next) {
@@ -17,7 +17,7 @@ export class FollowersController extends BaseController {
    async followUser(req, res, next ) {
     try {
       req.body.accountId = req.userInfo.id
-      const follower = await followersService.followUser(req.body)
+      const follower = await followersService.followUser(req.body.followingId)
       res.send(follower)
     } catch (error) {
       next(error)
