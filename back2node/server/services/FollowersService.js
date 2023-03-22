@@ -11,12 +11,13 @@ class FollowersService{
     }
     // @ts-ignore
     const profile = await profileService.getProfileById(follow.followingId);
+        // @ts-ignore
+        await follow.remove();
     // @ts-ignore
     profile.isFollowed = false;
     // @ts-ignore
-    await profile.save();
-    // @ts-ignore
-    await follow.remove();
+    // await profile.save();
+
     return `Successfully unfollowed`;
   }
 
