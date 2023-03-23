@@ -15,6 +15,18 @@ class ProfileService {
     AppState.activeProfile = new Account(res.data)
   }
 
+
+
+ async getProfile(profileId){
+  try {
+    const res = await api.get('api/profiles/' + profileId)
+    AppState.activeProfile = new Account(res.data)
+    logger.log('new active profile', AppState.activeProfile)
+  } catch (error) {
+    logger.log(error)
+  }
+ }
+
   // async search(searchTerm) {
 
 
