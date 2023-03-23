@@ -8,5 +8,6 @@ export const AppState = reactive({
 
   samples: [],
 
-  activeProfile:  null
+  activeProfile:  null,
+  profileSamples: []
 })

@@ -46,13 +46,22 @@ export default {
       }
     }
 
+    async function getProfileSamples() {
+      try {
+        await profileService.getProfileSamples(route.params.profileId)
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
 
     onMounted(() => {
       getProfile()
+      getProfileSamples()
     })
 
     return {
       profile: computed(() => AppState.activeProfile),
+      samples: computed(() => AppState.profileSamples),
     }
   }
 };

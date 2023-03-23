@@ -26,6 +26,11 @@ class ProfileService {
     logger.log(error)
   }
  }
+ async getProfileSamples(profileId){
+  const res = await api.get(`api/profiles/${profileId}/samples`);
+  AppState.profileSamples = res.data
+  logger.log('[profile samples]', AppState.profileSamples)
+ }
 
   // async search(searchTerm) {
 
