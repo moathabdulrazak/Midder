@@ -2,12 +2,12 @@
   <div class="audio-player">
     <div class="image-container">
       <img class="sample-image" :src="sample.coverImg" alt="">
+      <RouterLink :to="{ name: 'Profile', params: { profileId: sample?.creatorId } }">
+        <h6 class="px-4">
+          {{ sample.creator?.name }}
+        </h6>
+      </RouterLink>
     </div>
-    <RouterLink :to="{ name: 'Profile', params: { profileId: sample?.creatorId } }">
-      <h3>
-        <span>{{ sample.creator?.name }}</span>
-      </h3>
-    </RouterLink>
     <div class="audio-container">
       <h3 class="title">{{ sample.name }}</h3>
       <audio ref="audio" preload="auto" @timeupdate="updateProgressBar">
@@ -27,6 +27,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { computed, reactive, onMounted, ref } from 'vue';
 import { AppState } from '../AppState';
