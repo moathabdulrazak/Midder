@@ -5,7 +5,7 @@
     <div v-if="profile" class="row container-fluid cover-img"
       :style="`background-image: url(${profile.coverImg || 'https://louizapdx.com/wp-content/uploads/2018/11/bolivia-2209804_1920.jpg'})`">
 
-      <div class="col-12 d-flex align-items-center justify-content-around">
+      <div class="col-5 d-flex align-items-center justify-content-around">
         <img :src="profile.picture" alt="" class="img-fluid profile-picture rounded-circle elevation-5 slide-in">
         <div class="bg-transparent rounded elevation-5 p-5">
           <h1 class="elevation-1 text-light">
