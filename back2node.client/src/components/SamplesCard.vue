@@ -1,118 +1,99 @@
 <template>
-  <div class="component">
+  <div class="audio-player">
     <div class="image-container">
-      <img class="sample-image" :src="sample.coverImg" alt="">
+      <img class="sample-image img-fluid" :src="sample.coverImg" alt="">
     </div>
     <div class="audio-container">
       <h3 class="title">{{ sample.name }}</h3>
-      <audio controls :src="sample.sampleUrl"></audio>
+      <audio ref="audio" preload="auto" @timeupdate="updateProgressBar">
+        <source :src="sample.sampleUrl" type="audio/mpeg">
+      </audio>
+      <div class="play-pause-button" @click="togglePlayPause" :class="{ playing: isPlaying }"></div>
+      <div class="progress-bar" @click="seek">
+        <div class="progress" :style="{ width: progress + '%' }"></div>
+      </div>
       <div class="stream-info">
         <p class="streams">{{ sample.streams }} streams</p>
       </div>
       <div class="stream-info">
-        <p class="streams">{{ sample.tempo }} BPM</p>
-      </div>
-    </div>
-    <div class="creator-info">
-      <img class="profile-pic" :src="sample.creator?.picture" alt="">
-      <div class="creator-details">
-        <router-link :to="{ name: 'Profile', params: { profileId: sample?.creatorId } }">
-          <h3 class="name">{{ sample.creator?.name }}</h3>
-        </router-link>
+        <p class="tempo">{{ sample.tempo }} BPM</p>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-import { AppState } from '../AppState';
-import { computed } from 'vue';
-
 export default {
   props: { sample: { type: Object, required: true } },
-  setup() {
+  data() {
     return {
-      account: computed(() => AppState.account)
+      isPlaying: false,
+      progress: 0
+    };
+  },
+  methods: {
+    togglePlayPause() {
+      const audio = this.$refs.audio;
+      if (this.isPlaying) {
+        audio.pause();
+        this.isPlaying = false;
+      } else {
+        audio.play();
+        this.isPlaying = true;
+      }
+    },
+    updateProgressBar() {
+      const audio = this.$refs.audio;
+      const currentTime = audio.currentTime;
+      const duration = audio.duration;
+      if (duration) {
+        this.progress = (currentTime / duration) * 100;
+      } else {
+        this.progress = 0;
+      }
+    },
+    seek(event) {
+      const audio = this.$refs.audio;
+      const progressBar = event.currentTarget;
+      const boundingClientRect = progressBar.getBoundingClientRect();
+      const x = event.clientX - boundingClientRect.left;
+      const percentage = (x / boundingClientRect.width) * 100;
+      const duration = audio.duration;
+      if (duration) {
+        audio.currentTime = (percentage / 100) * duration;
+      }
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.component {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border: 5px solid purple;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.image-container {
-  flex: 1;
+.audio-player {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
-.sample-image {
-  height: 20vh;
-  border-radius: 10px;
-}
-
-.audio-container {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 20px;
-}
-
-.title {
-  margin-top: 0;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.stream-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.streams {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-.creator-info {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.profile-pic {
-  height: 50px;
-  width: 50px;
+.play-pause-button {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
   border-radius: 50%;
-  margin-right: 10px;
+  border: 2px solid #000;
+  cursor: pointer;
 }
 
-.creator-details {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+.playing {
+  background-color: #000;
 }
 
-.name {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0;
+.progress-bar {
+  height: 4px;
+  width: 100%;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.progress {
+  height: 100%;
+  background-color: #000;
 }
 </style>
