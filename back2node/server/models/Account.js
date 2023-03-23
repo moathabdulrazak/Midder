@@ -13,6 +13,8 @@ export const AccountSchema = new Schema(
     isFollowed: { type: Boolean, required: true, default: false },
     
     // NOTE If you wish to add additional properties do so here
+
+
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
