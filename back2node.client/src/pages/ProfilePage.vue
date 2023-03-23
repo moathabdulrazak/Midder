@@ -15,11 +15,14 @@
             <h2>
               {{ profile.bio }}
             </h2>
-
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div v-for="s in profileSamples">
+    <SamplesCard :sample="s" />
   </div>
 </template>
 
@@ -31,39 +34,36 @@ import { computed, reactive, onMounted } from 'vue';
 import { useRoute } from "vue-router";
 import Pop from "../utils/Pop.js";
 import { profileService } from "../services/ProfilesService.js";
+import SamplesCard from "../components/SamplesCard.vue";
 export default {
   setup() {
     const route = useRoute();
-
-
-
-
     async function getProfile() {
       try {
-        await profileService.getProfile(route.params.profileId)
-      } catch (error) {
-        Pop, error(error)
+        await profileService.getProfile(route.params.profileId);
+      }
+      catch (error) {
+        Pop, error(error);
       }
     }
-
     async function getProfileSamples() {
       try {
-        await profileService.getProfileSamples(route.params.profileId)
-      } catch (error) {
-        Pop.error(error)
+        await profileService.getProfileSamples(route.params.profileId);
+      }
+      catch (error) {
+        Pop.error(error);
       }
     }
-
     onMounted(() => {
-      getProfile()
-      getProfileSamples()
-    })
-
+      getProfile();
+      getProfileSamples();
+    });
     return {
       profile: computed(() => AppState.activeProfile),
-      samples: computed(() => AppState.profileSamples),
-    }
-  }
+      profileSamples: computed(() => AppState.profileSamples),
+    };
+  },
+  components: { SamplesCard }
 };
 </script>
 
