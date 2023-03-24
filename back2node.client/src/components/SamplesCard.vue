@@ -25,13 +25,19 @@
       <div class="stream-info">
         <p class="tempo">{{ sample.tempo }} BPM</p>
       </div>
+      <button class="download-button" @click="downloadSample">
+        <i class="mdi mdi-download"></i> Download
+      </button>
+
     </div>
   </div>
 </template>
 
+
 <script>
 import { computed, reactive, onMounted, ref } from 'vue';
 import { AppState } from '../AppState';
+
 export default {
   props: { sample: { type: Object, required: true } },
   data() {
@@ -72,7 +78,23 @@ export default {
       if (duration) {
         audio.currentTime = (percentage / 100) * duration;
       }
+    },
+    downloadSample() {
+      const download = new XMLHttpRequest();
+      download.responseType = 'blob';
+      download.onload = () => {
+        const file = new Blob([download.response], { type: 'audio/mpeg' });
+        const url = URL.createObjectURL(file);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${this.sample.name}.mp3`;
+        link.click();
+        URL.revokeObjectURL(url);
+      };
+      download.open('GET', this.sample.sampleUrl);
+      download.send();
     }
+
   }
 };
 </script>
@@ -113,8 +135,8 @@ export default {
 }
 
 .play-pause-button {
-  width: 60px;
-  height: 60px;
+  width: 30x;
+  height: 30px;
   // background-color: #2196F3;
   border-radius: 50%;
   cursor: pointer;
