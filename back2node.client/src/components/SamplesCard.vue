@@ -103,7 +103,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid purple;
+  border: 2px solid #512da8;
   padding: 1rem;
   margin-bottom: 1rem;
 }
