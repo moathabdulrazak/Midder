@@ -34,13 +34,9 @@
                 <label for="genre">Genre</label>
               </div>
               <div class="form-floating mb-3 elevation-5">
-                <label for="tempo">Tempo</label>
-                <input v-model="editable.tempo" type="hidden" name="tempo">
-                <div class="slider-wrapper">
-                  <input type="range" min="60" max="240" step="1" v-model="editable.tempo" class="slider"
-                    id="tempo-slider">
-                </div>
-                <label for="tempo-slider" class="slider-label">{{ editable.tempo }} BPM</label>
+                <input v-model="editable.tempo" type="number" required class="form-control" id="tempo"
+                  placeholder="tempo">
+                <label for="tempo">tempo</label>
               </div>
               <div class="form-group mb-3">
                 <label class="btn btn-dark form-file-label" for="songLink">
