@@ -1,7 +1,10 @@
 <template>
-  <div class="pt-3" v-for="s in samples">
-    <SamplesCard :sample="s" />
+  <div class="row justify-content-center pt-2 container-fluid">
 
+    <div class="col-11" v-for="s in samples">
+      <SamplesCard :sample="s" />
+
+    </div>
   </div>
 </template>
 
