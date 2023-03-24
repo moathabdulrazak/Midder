@@ -9,7 +9,12 @@
       </RouterLink>
     </div>
     <div class="audio-container">
-      <h3 class="title">{{ sample.name }}</h3>
+      <div class="title-container">
+        <h3 class="title">{{ sample.name }}</h3>
+        <button class="btn download-button" @click="downloadSample">
+          <i class="mdi mdi-download"></i> Download
+        </button>
+      </div>
       <audio ref="audio" preload="auto" @timeupdate="updateProgressBar">
         <source :src="sample.sampleUrl" type="audio/mpeg">
       </audio>
@@ -21,14 +26,8 @@
       </div>
       <div class="stream-info">
         <p class="streams">{{ sample.streams }} streams</p>
-      </div>
-      <div class="stream-info">
         <p class="tempo">{{ sample.tempo }} BPM</p>
       </div>
-      <button class="download-button" @click="downloadSample">
-        <i class="mdi mdi-download"></i> Download
-      </button>
-
     </div>
   </div>
 </template>
@@ -99,93 +98,128 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style>
 .audio-player {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  font-family: sans-serif;
+  border: 2px solid purple;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .image-container {
-  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-right: 20px;
+  margin-right: 1rem;
 }
 
 .sample-image {
-  max-width: 50%;
-  height: 10em;
-  border-radius: 50px;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+h6 {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
 }
 
 .audio-container {
-  flex: 3;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
 }
 
 .title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+audio {
+  width: 100%;
 }
 
 .play-pause-button {
-  width: 30x;
-  height: 30px;
-  // background-color: #2196F3;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
+  background-color: #512da8;
+  color: #fff;
   cursor: pointer;
-  margin-top: 10px;
-  position: relative;
+  margin: 1rem auto;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.play-pause-button:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-style: solid;
-  border-width: 0 15px 0 0;
-  border-color: transparent;
-  height: 20px;
-  width: 0;
+.play-pause-button:hover {
+  background-color: #311b92;
 }
 
-.play-pause-button.playing:before {
-  border-width: 0 15px 0 15px;
+.play-pause-button i {
+  font-size: 1.5rem;
 }
 
 .progress-bar {
-  width: 80%;
-  height: 10px;
-  background-color: #ddd;
+  height: 4px;
+  background-color: #eee;
+  margin-top: 1rem;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .progress {
   height: 100%;
-  background-color: #b700ff;
+  background-color: #512da8;
 }
 
 .stream-info {
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 
-.stream-info p {
-  margin: 0;
-  font-size: 1rem;
-}
-
+.streams,
 .tempo {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #512da8;
+  color: #fff;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  font-weight: bold;
-  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #311b92;
+}
+
+.download-button {
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .audio-player {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-container {
+    margin-right: 0;
+  }
+
+  .sample-image {
+    width: 80%;
+    height: auto;
+  }
 }
 </style>
