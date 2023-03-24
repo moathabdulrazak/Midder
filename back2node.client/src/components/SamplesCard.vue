@@ -13,7 +13,8 @@
       <audio ref="audio" preload="auto" @timeupdate="updateProgressBar">
         <source :src="sample.sampleUrl" type="audio/mpeg">
       </audio>
-      <div class="play-pause-button mdi" :class="['mdi-' + (isPlaying ? 'pause' : 'play')]" @click="togglePlayPause">
+      <div class="play-pause-button" @click="togglePlayPause">
+        <i :class="isPlaying ? 'mdi mdi-pause' : 'mdi mdi-play'"></i>
       </div>
       <div class="progress-bar" @click="seek">
         <div class="progress" :style="{ width: progress + '%' }"></div>
@@ -114,7 +115,7 @@ export default {
 .play-pause-button {
   width: 60px;
   height: 60px;
-  background-color: #2196F3;
+  // background-color: #2196F3;
   border-radius: 50%;
   cursor: pointer;
   margin-top: 10px;
