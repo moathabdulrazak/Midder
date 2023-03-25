@@ -1,6 +1,6 @@
 <template>
   <div v-if="!filteredSamples.length" class="spinner-wrapper">
-    <div class="spinner-border" role="status">
+    <div class="spinner-border bg-danger" role="status">
       <span class="sr-only"></span>
     </div>
   </div>
