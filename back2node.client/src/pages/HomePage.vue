@@ -1,4 +1,9 @@
 <template>
+  <div v-if="!filteredSamples.length" class="spinner-wrapper">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
   <div class="row justify-content-center pt-2 container-fluid">
     <div class="col-12 col-md-4 pb-3">
       <div class="input-group">
@@ -106,6 +111,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+}
+
+.spinner-border {
+  animation-duration: 10s;
+}
+
 .home {
   display: grid;
   height: 80vh;
