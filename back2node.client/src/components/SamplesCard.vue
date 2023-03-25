@@ -11,9 +11,6 @@
     <div class="audio-container">
       <div class="title-container">
         <h3 class="title">{{ sample.name }}</h3>
-        <button class="btn download-button" @click="downloadSample">
-          <i class="mdi mdi-download"></i> Download
-        </button>
       </div>
       <audio ref="audio" preload="auto" @timeupdate="updateProgressBar">
         <source :src="sample.sampleUrl" type="audio/mpeg">
@@ -24,6 +21,11 @@
       <div class="progress-bar" @click="seek">
         <div class="progress" :style="{ width: progress + '%' }"></div>
       </div>
+      <div class="download-container">
+        <button class="btn download-button" @click="downloadSample">
+          <i class="mdi mdi-download"></i> Download
+        </button>
+      </div>
       <div class="stream-info">
         <p class="streams">{{ sample.streams }} streams</p>
         <p class="tempo">{{ sample.tempo }} BPM</p>
@@ -32,8 +34,6 @@
     </div>
   </div>
 </template>
-
-
 <script>
 import { computed, reactive, onMounted, ref } from 'vue';
 import { AppState } from '../AppState';
@@ -159,6 +159,16 @@ h6 {
 
 audio {
   width: 100%;
+}
+
+.download-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.download-button {
+  margin-left: 10px;
 }
 
 .play-pause-button {
