@@ -27,7 +27,7 @@
       <div class="stream-info">
         <p class="streams">{{ sample.streams }} streams</p>
         <p class="tempo">{{ sample.tempo }} BPM</p>
-        <p class="created-at">{{ getCreatedAtString() }}</p>
+        <p class="tempo">{{ (getCreatedAtString()) }}</p>
       </div>
     </div>
   </div>
