@@ -27,6 +27,7 @@
       <div class="stream-info">
         <p class="streams">{{ sample.streams }} streams</p>
         <p class="tempo">{{ sample.tempo }} BPM</p>
+        <p class="created-at">{{ getCreatedAtString() }}</p>
       </div>
     </div>
   </div>
@@ -55,6 +56,22 @@ export default {
       } else {
         audio.play();
         this.isPlaying = true;
+      }
+    },
+    getCreatedAtString() {
+      const createdAt = new Date(this.sample.createdAt)
+      const now = new Date()
+      const diff = now - createdAt
+
+      const hours = Math.floor(diff / (1000 * 60 * 60))
+      const days = Math.floor(hours / 24)
+
+      if (days > 0) {
+        return `${days} day${days > 1 ? 's' : ''} ago`
+      } else if (hours > 0) {
+        return `${hours} hour${hours > 1 ? 's' : ''} ago`
+      } else {
+        return `just now`
       }
     },
     updateProgressBar() {
