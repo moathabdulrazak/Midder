@@ -23,8 +23,13 @@
         </div>
       </div>
     </div>
-    <div class="col-11" v-for="s in filteredSamples">
-      <SamplesCard :sample="s" />
+    <div class="col-11" v-if="filteredSamples.length > 0">
+      <div v-for="s in filteredSamples">
+        <SamplesCard :sample="s" />
+      </div>
+    </div>
+    <div v-else class="col-11 text-center">
+      <p>No results found</p>
     </div>
   </div>
 </template>
