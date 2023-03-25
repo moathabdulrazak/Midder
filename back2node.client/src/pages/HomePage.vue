@@ -4,18 +4,18 @@
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search for users or samples" v-model="search">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary mdi" type="button" @click="searchSamples"><i
+          <button class="btn btn-outline-secondary mdi mdi-circle" type="button" @click="searchSamples"><i
               class="fa fa-search"></i></button>
         </div>
       </div>
     </div>
     <div class="col-12 col-md-4 pb-3">
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="filterDrop" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Filter by genre
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu" aria-labelledby="filterDrop">
           <a class="dropdown-item" href="#" @click="setGenre('all')">All</a>
           <a class="dropdown-item" href="#" @click="setGenre('hiphop')">Hip Hop</a>
           <a class="dropdown-item" href="#" @click="setGenre('rock')">Rock</a>
@@ -56,6 +56,7 @@ export default {
 
     function setGenre(selectedGenre) {
       genre.value = selectedGenre;
+      searchSamples();
     }
 
     function filterSamples(samples, genre, search) {
