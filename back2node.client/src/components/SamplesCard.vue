@@ -12,7 +12,7 @@
       <div class="title-container">
         <h3 class="title">{{ sample.name }}</h3>
       </div>
-      <audio ref="audio" preload="auto" @timeupdate="updateProgressBar">
+      <audio ref="audio" preload="auto" @timeupdate="updateProgressBar" @ended="onAudioEnded">
         <source :src="sample.sampleUrl" type="audio/mpeg">
       </audio>
       <div class="play-pause-button" @click="togglePlayPause">
@@ -109,8 +109,10 @@ export default {
       };
       download.open('GET', this.sample.sampleUrl);
       download.send();
+    },
+    onAudioEnded() {
+      this.isPlaying = false;
     }
-
   }
 };
 </script>
