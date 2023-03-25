@@ -57,6 +57,7 @@ export default {
 
     async function getAllSamples() {
       try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
         const samples = await sampleService.getAllSamples();
       } catch (error) {
         logger.log(error.message);
@@ -124,7 +125,7 @@ export default {
 }
 
 .spinner-border {
-  animation-duration: 10s;
+  animation-duration: 2s;
 }
 
 .home {
