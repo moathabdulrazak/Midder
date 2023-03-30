@@ -3,6 +3,9 @@
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <h1>Midder</h1>
     </router-link>
+    <div class="">
+      <UploadSample />
+    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -23,11 +26,13 @@
 
 <script>
 import Login from './Login.vue'
+import UploadSample from "./UploadSample.vue";
+
 export default {
   setup() {
     return {}
   },
-  components: { Login }
+  components: { Login, UploadSample }
 }
 </script>
 

@@ -10,6 +10,7 @@ export const SampleSchema = new Schema({
   genre: { type: String },
   sampleUrl: { type: String, required: true },
   streams: { type: Number, required: false, default: 0 },
+  tempo: { type: Number, required: true, default: 0 },
 }, { timestamps: true, toJSON: { virtuals: true } })
 
 

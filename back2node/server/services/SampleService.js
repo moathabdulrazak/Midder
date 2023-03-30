@@ -7,6 +7,15 @@ import { logger } from "../utils/Logger.js"
 
 
 class SampleService {
+  async getMySamples(_id) {
+    const mySamples = await dbContext.Sample.find({_id}).populate('samples')
+    return mySamples
+  }
+  async getSamplesByProfileId(creatorId) {
+    // debugger
+    const samples = await dbContext.Sample.find({ creatorId })
+    return samples
+  }
   // @ts-ignore
   async updateSample(sampleId, sampleData, userId) {
     const originalSample = await this.getOneSample(sampleId);
@@ -21,6 +30,7 @@ class SampleService {
     originalSample.coverImg = sampleData.coverImg ? sampleData.coverImg : originalSample.coverImg;
     originalSample.genre = sampleData.genre ? sampleData.genre : originalSample.genre;
     originalSample.sampleUrl = sampleData.sampleUrl ? sampleData.sampleUrl : originalSample.sampleUrl;
+    originalSample.tempo = sampleData.tempo ? sampleData.tempo : originalSample.tempo;
     await originalSample.save();
     return originalSample;
   }
@@ -49,12 +59,13 @@ class SampleService {
     return sample
   }
   async getAllSamples() {
-    const samples = await dbContext.Sample.find()
+    // const samples = await dbContext.Sample.find()
+    const samples = await dbContext.Sample.find().populate('creator')
     logger.log("all samples", samples)
     return samples
   }
   async createSample(sampleData) {
-    const sample = await (await dbContext.Sample.create(sampleData))
+    const sample = await (await (await dbContext.Sample.create(sampleData)).populate('creator'))
     logger.log("created a sample")
     return sample
   }
