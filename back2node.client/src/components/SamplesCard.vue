@@ -1,7 +1,7 @@
 <template>
   <div class="audio-player pt-2">
     <div class="image-container">
-      <img class="sample-image" :src="sample.creator.picture" alt="">
+      <img class="sample-image" :src="sample.creator?.picture" alt="">
       <RouterLink :to="{ name: 'Profile', params: { profileId: sample?.creatorId } }">
         <h6 class="px-4">
           {{ sample.creator?.name }}
